@@ -1,11 +1,11 @@
 ARG SRS_VERSION=2.0.258
 
-FROM debian:jessie AS build
+FROM  arm32v7/debian:jessie AS build
 
 ARG SRS_VERSION
 ENV SRS_VERSION=${SRS_VERSION}
 ENV SRS_COMMIT=4cb8de3029b4a0f1b2578def6be7771b926ddfa9
-ENV SRS_CONFIGURE_ARGS=
+ENV SRS_CONFIGURE_ARGS= -pi -full
 
 RUN set -ex; \
     apt-get update; \
@@ -21,7 +21,7 @@ RUN set -ex; \
     rm -rf /var/lib/apt/lists/*;
 COPY ./srs.conf /srs/conf/docker.conf
 
-FROM debian:jessie-slim AS dist
+FROM  arm32v7/debian:jessie-slim AS dist
 ARG SRS_VERSION
 ENV SRS_VERSION=${SRS_VERSION}
 EXPOSE 1935 1985 8080

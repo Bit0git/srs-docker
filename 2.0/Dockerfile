@@ -5,7 +5,7 @@ FROM  arm32v7/debian:jessie AS build
 ARG SRS_VERSION
 ENV SRS_VERSION=${SRS_VERSION}
 ENV SRS_COMMIT=4cb8de3029b4a0f1b2578def6be7771b926ddfa9
-ENV SRS_CONFIGURE_ARGS= "--pi --full"
+ENV SRS_CONFIGURE_ARGS= 
 
 RUN set -ex; \
     apt-get update; \
@@ -14,7 +14,7 @@ RUN set -ex; \
     wget https://github.com/ossrs/srs/archive/${SRS_COMMIT}.tar.gz; \
     tar zxf ${SRS_COMMIT}.tar.gz; \
     cd srs-${SRS_COMMIT}/trunk; \
-    ./configure --prefix=/srs ${SRS_CONFIGURE_ARGS}; \
+    ./configure --prefix=/srs ${SRS_CONFIGURE_ARGS} --pi --full; \
     make; \
     make install; \
     rm -rf /tmp/*; \

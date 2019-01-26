@@ -19,7 +19,7 @@ RUN set -ex; \
     make install; \
     rm -rf /tmp/*; \
     rm -rf /var/lib/apt/lists/*;
-COPY ./srs.conf /srs/conf/docker.conf
+# COPY ./srs.conf /srs/conf/docker.conf
 
 FROM  arm32v7/debian:jessie-slim AS dist
 ARG SRS_VERSION
